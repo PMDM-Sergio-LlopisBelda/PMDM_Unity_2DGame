@@ -10,7 +10,9 @@ public class PlayerController : MonoBehaviour
     public Transform groundCheck;
     private Animator animator;
     private Rigidbody2D rigidbody2d;
-    public bool grounded = true;
+    public bool isGrounded = true;
+    public bool canMove = true;
+    
 
     void Start () 
     {
@@ -20,23 +22,26 @@ public class PlayerController : MonoBehaviour
 
     void Update () 
     {
-        grounded = Physics2D.Linecast (transform.position,
+        isGrounded = Physics2D.Linecast (transform.position,
         groundCheck.position,
         LayerMask.GetMask ("Ground"));
 
-        if (grounded && Input.GetButtonDown ("Jump")) {
+        if (isGrounded && Input.GetButtonDown ("Jump")) {
             rigidbody2d.AddForce (Vector2.up * jumpMovement);
         }
         
-        if (grounded) {
+        if (isGrounded) {
             animator.SetTrigger ("Grounded");
         } else {
             animator.SetTrigger ("Jump");
         }
 
-        Speed = Input.GetAxis("Horizontal") * lateralMovement;
-        transform.Translate (Vector2.right * Speed * Time.deltaTime);
-        animator.SetFloat("Speed", Mathf.Abs(Speed));
+        if (canMove) {
+            Speed = Input.GetAxis("Horizontal") * lateralMovement;
+            transform.Translate (Vector2.right * Speed * Time.deltaTime);
+            animator.SetFloat("Speed", Mathf.Abs(Speed));
+        }
+
 
         if (Speed < 0) {
             transform.localScale = new Vector3 (-1, 1, 1);
