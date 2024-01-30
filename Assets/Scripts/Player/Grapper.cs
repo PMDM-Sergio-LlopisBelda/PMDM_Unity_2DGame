@@ -5,49 +5,48 @@ public class Grapper : MonoBehaviour
 {
 
     [Header("Hook Parameters")]
-    public float maxDistance = 10f;
+    public float maxDistance = 14f;
     public float grappleSpeed = 10f;
     public float grappleShootSpeed = 20f;
     private bool isGrappling = false;
     private bool connectedHook = false;
-    private bool clicked = false;
-    private bool isImpulsed = false;
+    public float timeBetweemHook = 3f;
+    public float timeNextHook = 0f;
 
     public GameObject player;
     public LayerMask grapplableMask;
-    private PlayerController playerScript;
     private LineRenderer line;
     private Vector2 target;
-    private Vector2 direction;
 
     void Start()
     {
         line = GetComponent<LineRenderer>();
-        playerScript = player.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0) && !isGrappling)
-        {
-            clicked = true;
-            StarGrapple();
+
+        if (timeNextHook > 0) {
+            timeNextHook -= Time.deltaTime;
         }
 
-        if (Input.GetMouseButtonUp(0)) {
-            clicked = false;
-            DisconectHook();
+        if (Input.GetMouseButtonDown(0) && !isGrappling)
+        {
+            if (timeNextHook <= 0) {
+                StarGrapple();
+                timeNextHook = timeBetweemHook;
+            }
+            
         }
 
         if (connectedHook) 
         {
+            Vector2 grapplePos = Vector2.Lerp(transform.position, target, grappleSpeed * Time.deltaTime);
             line.SetPosition(0, transform.position);
 
-            if (!isImpulsed) {
-                playerScript.rigidbody2d.AddForce(direction * 1.5f, ForceMode2D.Impulse);
-                isImpulsed = true;
-                DisconectHook();
-            }
+            transform.position = grapplePos;
+
+            line.SetPosition(0, transform.position);
             
             if (Vector2.Distance(transform.position, target) < 1.5f)
             {
@@ -60,11 +59,10 @@ public class Grapper : MonoBehaviour
     private void StarGrapple() {
 
         // Se guarda el punto donde se ha cliclado.
-        direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
+        Vector2 direction = Camera.main.ScreenToWorldPoint(Input.mousePosition) - transform.position;
         RaycastHit2D hit = Physics2D.Raycast(transform.position, direction, maxDistance, grapplableMask);
 
         if (hit.collider != null) {
-            isImpulsed = false;
             isGrappling = true;
             target = hit.point;
             line.enabled = true;
@@ -78,9 +76,9 @@ public class Grapper : MonoBehaviour
     {
         float currentTimeGrappling = 0;
         float maxTimeGrappling = 2f;
+
         line.SetPosition(0, transform.position);
         line.SetPosition(1, transform.position);
-
 
         Vector2 newPosition;
 
@@ -92,17 +90,13 @@ public class Grapper : MonoBehaviour
             yield return null;
         }
 
-        if (clicked) {
-           connectedHook = true; 
-           playerScript.canMove = false;
-        }
+        connectedHook = true; 
         line.SetPosition(1, target);
     }
 
 
     private void DisconectHook()
     {
-        playerScript.canMove = true;
         connectedHook = false;
         isGrappling = false;
         line.enabled = false;
