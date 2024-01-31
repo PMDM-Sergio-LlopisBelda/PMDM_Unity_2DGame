@@ -12,7 +12,7 @@ public class PlayerController : MonoBehaviour
     public Rigidbody2D rigidbody2d;
     public bool isGrounded = true;
     public bool canMove = true;
-    private float scale = 0.7f;
+    public float scale = 0.7f;
     
 
     void Start () 

@@ -3,7 +3,7 @@ using UnityEngine;
 public class RangeVisionEnemy : MonoBehaviour
 {
 
-    public Animator animator;
+    public Animator enemyAnimator;
     public Enemy enemy;
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -11,9 +11,9 @@ public class RangeVisionEnemy : MonoBehaviour
         if (collider != null) {
             if (collider.CompareTag("Player"))
             {
-                animator.SetBool("Walk", false);
-                animator.SetBool("Run", false);
-                animator.SetBool("Attack", true);
+                enemyAnimator.SetBool("Walk", false);
+                enemyAnimator.SetBool("Run", false);
+                enemyAnimator.SetBool("Attack", true);
                 enemy.hitting = true;
                 GetComponent<BoxCollider2D>().enabled = false;
             }
@@ -23,7 +23,6 @@ public class RangeVisionEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame
