@@ -11,9 +11,9 @@ public class RangeVisionEnemy : MonoBehaviour
         if (collider != null) {
             if (collider.CompareTag("Player"))
             {
-                animator.SetBool("Walk", false);
-                animator.SetBool("Run", false);
-                animator.SetBool("Attack", true);
+                enemyAnimator.SetBool("Walk", false);
+                enemyAnimator.SetBool("Run", false);
+                enemyAnimator.SetBool("Attack", true);
                 enemy.hitting = true;
                 GetComponent<BoxCollider2D>().enabled = false;
             }

@@ -27,13 +27,7 @@ public class Grapper : MonoBehaviour
     {
         if (Input.GetMouseButtonDown(1) && !isGrappling)
         {
-            clicked = true;
             StarGrapple();
-        }
-
-        if (Input.GetMouseButtonUp(1)) {
-            clicked = false;
-            DisconectHook();
         }
 
         if (connectedHook) 

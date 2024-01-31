@@ -10,6 +10,7 @@ public class SwordAttack : MonoBehaviour
     public Collider2D damageArea;
     private LayerMask enemyLayer;
     private HpManager hpManager;
+    private PlayerController playerController;
 
     // Start is called before the first frame update
     void Start()
@@ -17,6 +18,7 @@ public class SwordAttack : MonoBehaviour
         animator = GetComponent<Animator>();
         enemyLayer = LayerMask.GetMask("Enemy");
         hpManager = GetComponent<HpManager>();
+        playerController = GetComponent<PlayerController>();
     }
 
     // Update is called once per frame
@@ -31,11 +33,14 @@ public class SwordAttack : MonoBehaviour
     IEnumerator PlayerAttacks()
     {
         canAttack = false;
+        playerController.canMove = false;
         DealDamage();
         hpManager.TakeDamage(5);
         animator.SetTrigger("IsAttacking");
         yield return new WaitForSeconds(0.35f);
         canAttack = true;
+        playerController.canMove = true;
+
     }
 
     private void DealDamage()
