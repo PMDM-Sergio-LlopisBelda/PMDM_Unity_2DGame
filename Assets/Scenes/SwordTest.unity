@@ -251,6 +251,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2488875242057520683, guid: 78918f731fc757b0b823c79cbd0fa6d8, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 5456284775016857728, guid: 78918f731fc757b0b823c79cbd0fa6d8, type: 3}
       propertyPath: m_Name
       value: Enemy
@@ -461,7 +465,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 107f979614cff2002ab91b35065af045, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 20
+  damage: 5
   damageArea: {fileID: 774964795}
 --- !u!114 &420801289
 MonoBehaviour:
@@ -475,7 +479,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fbdca44be73d13aa90ab53d795a74e9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxHp: 1000
+  maxHp: 25
   actualHp: 0
 --- !u!1 &502902756
 GameObject:
@@ -777,8 +781,8 @@ Transform:
   m_GameObject: {fileID: 774964792}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 1.11, y: -0.08, z: 0}
-  m_LocalScale: {x: 2.4394424, y: 1.9186158, z: 2.9203386}
+  m_LocalPosition: {x: -0.07, y: -0.19, z: 0}
+  m_LocalScale: {x: 1.0368361, y: 2.8953831, z: 2.9203386}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 420801274}
@@ -1810,7 +1814,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -420.20004, y: 234.29999}
+  m_AnchoredPosition: {x: -420.2001, y: 234.29999}
   m_SizeDelta: {x: -906.25476, y: -520.04407}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1590088398
