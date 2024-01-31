@@ -14,6 +14,7 @@ public class Enemy : MonoBehaviour
     public float timeBetweenAttack = 1.5f;
     public float timeNextAttack = 0f;
     private float maxRangeViewOnY = 1f; 
+    //public RectTransform hpBar;
 
     [Header("Attack")]
     public float rangeVision;
@@ -101,6 +102,7 @@ public class Enemy : MonoBehaviour
                     transform.Translate(Vector3.right * speedRun * Time.deltaTime);
                     transform.rotation = Quaternion.Euler(0,0,0);
                     enemiyAnimation.SetBool("Attack", false);
+                    //hpBar.position = transform.position;
                 }
                 else if (transform.position.x > target.transform.position.x && 
                         transform.position.y - target.transform.position.y < maxRangeViewOnY)
@@ -110,6 +112,7 @@ public class Enemy : MonoBehaviour
                     transform.Translate(Vector3.right * speedRun * Time.deltaTime);
                     transform.rotation = Quaternion.Euler(0,180,0);
                     enemiyAnimation.SetBool("Attack", false);
+                    //hpBar.position = transform.position;
                 }
 
             }

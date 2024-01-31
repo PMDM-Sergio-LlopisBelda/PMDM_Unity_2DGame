@@ -7,6 +7,8 @@ public class HpManager : MonoBehaviour
     public float maxHp = 20;
     public float actualHp;
     private Animator animator;
+    private float distanceToMove = 10;
+    public GameObject parentObject;
     // Start is called before the first frame update
     void Start()
     {
@@ -18,16 +20,24 @@ public class HpManager : MonoBehaviour
     void Update()
     {
         if (actualHp <= 0) {
-            Destroy(gameObject);
+            if (parentObject != null) {
+                Destroy(parentObject);
+            } else {
+                Destroy(gameObject);
+            }
         }
     }
 
     public void TakeDamage(float damage) {
         if (actualHp > 0f) {
             animator.SetTrigger("isDamaged");
-            print(actualHp);
             actualHp -= damage;
-            print(actualHp);
+            //PushWhenDamaged();
         }
     }
+
+    private void PushWhenDamaged() {
+        transform.Translate(-transform.forward * distanceToMove);
+    }
+
 }
