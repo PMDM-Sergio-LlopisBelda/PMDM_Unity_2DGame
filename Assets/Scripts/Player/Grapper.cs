@@ -25,18 +25,9 @@ public class Grapper : MonoBehaviour
 
     void Update()
     {
-
-        if (timeNextHook > 0) {
-            timeNextHook -= Time.deltaTime;
-        }
-
-        if (Input.GetMouseButtonDown(0) && !isGrappling)
+        if (Input.GetMouseButtonDown(1) && !isGrappling)
         {
-            if (timeNextHook <= 0) {
-                StarGrapple();
-                timeNextHook = timeBetweemHook;
-            }
-            
+            StarGrapple();
         }
 
         if (connectedHook) 

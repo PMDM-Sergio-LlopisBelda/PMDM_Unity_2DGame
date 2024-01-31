@@ -25,16 +25,16 @@ public class PlayerController : MonoBehaviour
     {
         isGrounded = Physics2D.Linecast (transform.position,
         groundCheck.position,
-        LayerMask.GetMask ("Ground"));
+        LayerMask.GetMask("Ground"));
 
-        if (isGrounded && Input.GetButtonDown ("Jump")) {
+        if (isGrounded && Input.GetButtonDown("Jump")) {
             rigidbody2d.AddForce (Vector2.up * jumpMovement);
         }
         
         if (isGrounded) {
-            animator.SetTrigger ("Grounded");
+            animator.SetTrigger("Grounded");
         } else {
-            animator.SetTrigger ("Jump");
+            animator.SetTrigger("Jump");
         }
 
         if (canMove) {
@@ -45,9 +45,9 @@ public class PlayerController : MonoBehaviour
 
 
         if (Speed < 0) {
-            transform.localScale = new Vector3 (-scale, scale, scale);
+            transform.localScale = new Vector3(-scale, scale, scale);
         } else if (Speed > 0){
-            transform.localScale = new Vector3 (scale, scale, scale);
+            transform.localScale = new Vector3(scale, scale, scale);
         }
 }
 
