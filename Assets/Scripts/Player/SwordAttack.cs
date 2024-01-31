@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SwordAttack : MonoBehaviour
 {
-    public float damage = 5;
+    public float damage = GameManager.playerDmg;
     private Animator animator;
     private bool canAttack = true;
     public Collider2D damageArea;
@@ -24,6 +24,7 @@ public class SwordAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        damage = GameManager.playerDmg;
         if (Input.GetMouseButton(0) && canAttack)
         {
             StartCoroutine(PlayerAttacks());
