@@ -13,14 +13,13 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     public bool canMove = true;
     public float scale = 0.7f;
-    
+    public ShopChestHandler shopChestHandler;    
 
     void Start () 
     {
         animator = GetComponent<Animator> ();
         rigidbody2d = GetComponent<Rigidbody2D> ();
     }
-
     void Update () 
     {
         isGrounded = Physics2D.Linecast (transform.position,
@@ -49,6 +48,25 @@ public class PlayerController : MonoBehaviour
         } else if (Speed > 0){
             transform.localScale = new Vector3(scale, scale, scale);
         }
-}
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Gold") {
+            GameManager.coindsCollected++;
+            Destroy (collider.gameObject);
+        }
+        if (collider.gameObject.tag == "ShopChest") {
+            StartCoroutine(OpenShopChest());
+        }
+    }
+
+    IEnumerator OpenShopChest() {
+        if (GameManager.canOpenShopChest) {
+            shopChestHandler.HandleOpenChest();
+            GameManager.canOpenShopChest = false;
+            yield return new WaitForSeconds(10f);
+        }
+    }
 
 }
