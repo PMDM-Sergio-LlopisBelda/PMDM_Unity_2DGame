@@ -228,7 +228,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1003888015
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!114 &52965154
@@ -412,6 +412,7 @@ MonoBehaviour:
   maxHp: 20
   actualHp: 0
   parentObject: {fileID: 2022965710}
+  bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
 --- !u!1 &329258642
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,6 +609,7 @@ MonoBehaviour:
   maxHp: 2500
   actualHp: 0
   parentObject: {fileID: 0}
+  bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
 --- !u!1 &502902756
 GameObject:
   m_ObjectHideFlags: 0
@@ -2163,7 +2165,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: -1003888015
   m_SortingOrder: 0
   m_TargetDisplay: 0
 --- !u!224 &1744999147
@@ -2760,6 +2762,63 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
+--- !u!1001 &1266818830827525828
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 1090752220377202772, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_Name
+      value: BloodParticles
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -8.384872
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -2.1021812
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 2033.5839
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -90
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4397009514792322953, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: f482967df137e19e48167c62d0d267b4, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -2770,3 +2829,4 @@ SceneRoots:
   - {fileID: 1744999147}
   - {fileID: 329258645}
   - {fileID: 2022965711}
+  - {fileID: 1266818830827525828}
