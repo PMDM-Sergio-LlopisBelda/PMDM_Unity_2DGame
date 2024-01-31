@@ -85,7 +85,6 @@ public class Grapper : MonoBehaviour
         line.SetPosition(1, target);
     }
 
-
     private void DisconectHook()
     {
         connectedHook = false;

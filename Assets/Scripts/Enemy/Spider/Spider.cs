@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class Spider : MonoBehaviour
@@ -17,4 +18,21 @@ public class Spider : MonoBehaviour
     {
         
     }
+
+    private void dropSpider() 
+    {
+
+    }
+
+    IEnumerator spiderWeb() 
+    {
+        
+        return null;
+
+    }
+
+    private void DisconectHook()
+    {
+
+    }   
 }

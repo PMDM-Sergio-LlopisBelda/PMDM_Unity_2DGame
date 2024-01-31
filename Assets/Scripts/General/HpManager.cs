@@ -9,7 +9,6 @@ public class HpManager : MonoBehaviour
     private Animator animator;
     private float distanceToMove = 10;
     public GameObject parentObject;
-
     public ParticleSystem bloodParticles;
 
     // Start is called before the first frame update

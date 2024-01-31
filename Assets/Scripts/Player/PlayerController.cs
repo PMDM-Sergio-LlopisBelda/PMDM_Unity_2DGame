@@ -49,6 +49,14 @@ public class PlayerController : MonoBehaviour
         } else if (Speed > 0){
             transform.localScale = new Vector3(scale, scale, scale);
         }
-}
+    }
+
+    void OnTriggerEnter2D(Collider2D collider)
+    {
+        if (collider.gameObject.tag == "Gold") {
+            GameManager.coindsCollected++;
+            Destroy (collider.gameObject);
+        }
+    }
 
 }

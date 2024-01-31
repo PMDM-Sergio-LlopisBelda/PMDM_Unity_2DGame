@@ -25,7 +25,7 @@ public class Respwan : MonoBehaviour
         while(state) 
         {
             GameObject enemy = Instantiate(spider);
-            enemy.transform.position = new Vector3(Random.Range(minX, maxX), 0f, 0);
+            enemy.transform.position = new Vector3(Random.Range(minX, maxX), 2f, 0);
             yield return new WaitForSeconds(5f);
         }
     }

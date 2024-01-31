@@ -2,22 +2,35 @@ using UnityEngine;
 
 public class RangeVisionEnemy : MonoBehaviour
 {
-
     public Animator enemyAnimator;
     public Enemy enemy;
-    public float damage = 5;
+    [SerializeField] float timeBetweenAttacks = 4f;
+    [SerializeField] float timeLastAttack = 0f;
+    private bool canAttack;
 
-    void OnTriggerEnter2D(Collider2D collider)
+    void OnTriggerEnter2D(Collider2D other)
     {
-        if (collider != null) {
-            if (collider.CompareTag("Player"))
+        TryAttack(other);  
+    }
+
+      void OnTriggerStay2D(Collider2D other)
+    {
+        TryAttack(other);  
+    }
+
+    private void TryAttack(Collider2D collider) 
+    {
+        if (collider != null) 
+        {
+            if (collider.CompareTag("Player") && canAttack)
             {
                 enemyAnimator.SetBool("Walk", false);
                 enemyAnimator.SetBool("Run", false);
-                enemyAnimator.SetBool("Attack", true);
+                enemyAnimator.SetBool("Attack", true);  
                 enemy.hitting = true;
-                collider.GetComponent<HpManager>().TakeDamage(damage);
                 GetComponent<BoxCollider2D>().enabled = false;
+                canAttack = false;
+                timeLastAttack = timeBetweenAttacks;
             }
         }
     }
@@ -30,6 +43,11 @@ public class RangeVisionEnemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (!canAttack && timeLastAttack > 0) {
+            canAttack = false;
+            timeLastAttack -= Time.deltaTime;
+        } else {
+            canAttack = true;
+        }
     }
 }
