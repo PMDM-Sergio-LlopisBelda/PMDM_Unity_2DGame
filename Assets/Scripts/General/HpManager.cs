@@ -9,6 +9,9 @@ public class HpManager : MonoBehaviour
     private Animator animator;
     private float distanceToMove = 10;
     public GameObject parentObject;
+
+    public ParticleSystem bloodParticles;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -31,6 +34,7 @@ public class HpManager : MonoBehaviour
     public void TakeDamage(float damage) {
         if (actualHp > 0f) {
             animator.SetTrigger("isDamaged");
+            Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 1.0f);
             actualHp -= damage;
             //PushWhenDamaged();
         }
