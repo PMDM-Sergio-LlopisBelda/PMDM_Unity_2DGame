@@ -10,10 +10,9 @@ public class Enemy : MonoBehaviour
     public float speedWalk;
     public float speedRun;
     public bool hitting;
+    public bool isWithinReach;
     public float scale = 0.85f; 
-    public float timeBetweenAttack = 1.5f;
-    public float timeNextAttack = 0f;
-    private float maxRangeViewOnY = 1f; 
+    private float maxRangeViewOnY = 0.5f; 
     //public RectTransform hpBar;
 
     [Header("Attack")]
@@ -38,11 +37,6 @@ public class Enemy : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        if (timeNextAttack > 0) {
-            timeNextAttack -= Time.deltaTime;
-        }
-
         Behaviors();
     }
 
@@ -120,14 +114,6 @@ public class Enemy : MonoBehaviour
             {
                 if (!hitting)
                 {
-                    if (transform.rotation.x < target.transform.position.x)
-                    {
-                        transform.rotation = Quaternion.Euler(0,0,0);
-                    }
-                    else
-                    {
-                        transform.rotation = Quaternion.Euler(0,180,0);
-                    }
                     enemiyAnimation.SetBool("Walk", false);
                     enemiyAnimation.SetBool("Run", false);
                 }
@@ -153,6 +139,5 @@ public class Enemy : MonoBehaviour
     {
         Hit.GetComponent<BoxCollider2D>().enabled = false;
     } 
-
 
 }

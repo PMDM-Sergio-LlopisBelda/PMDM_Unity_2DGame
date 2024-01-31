@@ -4,11 +4,14 @@ using UnityEngine;
 
 public class HittingEnemy : MonoBehaviour
 {
+    public float damage = 5;
+
 
     void OnTriggerEnter2D(Collider2D collider)
     {
-        if (collider.CompareTag("Player"))
-        print("Daño");
+        if (collider.CompareTag("Player")) {
+            collider.GetComponent<HpManager>().TakeDamage(damage);   
+        }
     }
 
     // Start is called before the first frame update
