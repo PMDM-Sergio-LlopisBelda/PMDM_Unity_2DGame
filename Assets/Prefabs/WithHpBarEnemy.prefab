@@ -491,6 +491,7 @@ MonoBehaviour:
   actualHp: 0
   parentObject: {fileID: 5128474262222669130}
   bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+  loot: {fileID: 8729559498496336925, guid: c884188763519447d8b66c8b8731d33d, type: 3}
 --- !u!4 &5452079375559572573 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 836432558539182831, guid: 78918f731fc757b0b823c79cbd0fa6d8, type: 3}
