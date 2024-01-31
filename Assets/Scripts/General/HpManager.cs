@@ -24,8 +24,10 @@ public class HpManager : MonoBehaviour
 
     public void TakeDamage(float damage) {
         if (actualHp > 0f) {
-            //animator.SetTrigger("isDamaged");
+            animator.SetTrigger("isDamaged");
+            print(actualHp);
             actualHp -= damage;
+            print(actualHp);
         }
     }
 }
