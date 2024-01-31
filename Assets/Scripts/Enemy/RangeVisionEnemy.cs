@@ -3,7 +3,7 @@ using UnityEngine;
 public class RangeVisionEnemy : MonoBehaviour
 {
 
-    public Animator animator;
+    public Animator enemyAnimator;
     public Enemy enemy;
 
     void OnTriggerEnter2D(Collider2D collider)
@@ -23,7 +23,6 @@ public class RangeVisionEnemy : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        enemy = GetComponent<Enemy>();
     }
 
     // Update is called once per frame

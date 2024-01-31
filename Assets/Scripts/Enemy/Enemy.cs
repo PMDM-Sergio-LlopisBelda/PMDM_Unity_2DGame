@@ -4,31 +4,44 @@ public class Enemy : MonoBehaviour
 {
 
     [Header("Atributes")]
-    public float rutin;
+    public float routine;
     public float crono;
+    public int direcction;
     public float speedWalk;
     public float speedRun;
-    public int direcction;
     public bool hitting;
+    public float scale = 0.85f; 
+    public float timeBetweenAttack = 1.5f;
+    public float timeNextAttack = 0f;
+    private float maxRangeViewOnY = 1f; 
 
     [Header("Attack")]
     public float rangeVision;
     public float rangeAttack;
     public  GameObject range;
     public  GameObject Hit;
-    public Animator animator;
+    public Animator enemiyAnimation;
     public GameObject target;
+
+    public Rigidbody2D rb;
 
 
     void Start()
     {
-        animator = GetComponent<Animator>();
+        enemiyAnimation = GetComponent<Animator>();
         target = GameObject.Find("Player");
+        transform.localScale.Set(scale, scale, scale);
+        rb = GetComponent<Rigidbody2D>();
     }
 
     // Update is called once per frame
     void Update()
     {
+
+        if (timeNextAttack > 0) {
+            timeNextAttack -= Time.deltaTime;
+        }
+
         Behaviors();
     }
 
@@ -37,24 +50,24 @@ public class Enemy : MonoBehaviour
 
         if (Mathf.Abs(transform.position.x - target.transform.position.x) > rangeVision && !hitting)
         {
-            animator.SetBool("Run", false);
+            enemiyAnimation.SetBool("Run", false);
             crono += 1 * Time.deltaTime;
 
-            if (crono >= 4)
+            if (crono >= 2)
             {
-                rutin = Random.Range(0, 2);
+                routine = Random.Range(0, 2);
                 crono = 0;
             }
 
-            switch(rutin)
+            switch(routine)
             {
                 case 0:
-                    animator.SetBool("Walk", false);
+                    enemiyAnimation.SetBool("Walk", false);
                     break;
                 
                 case 1:
                     direcction = Random.Range(0 ,2);
-                    rutin++;
+                    routine++;
                     break;
                 
                 case 2:
@@ -70,31 +83,35 @@ public class Enemy : MonoBehaviour
                             transform.Translate(Vector3.right * speedWalk * Time.deltaTime); 
                             break;
                     }
-                    animator.SetBool("Walk", true);
+                    enemiyAnimation.SetBool("Walk", true);
                     break;    
             }
 
         }
         else 
         {
-            if (System.Math.Abs(transform.position.x - target.transform.position.x) > rangeAttack && !hitting)
+            if (Mathf.Abs(transform.position.x - target.transform.position.x) > rangeAttack && !hitting)
             {
-                if (transform.position.x < target.transform.position.x)
+
+                if (transform.position.x < target.transform.position.x && 
+                    transform.position.y - target.transform.position.y < maxRangeViewOnY)
                 {
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Run", true);
+                    enemiyAnimation.SetBool("Walk", false);
+                    enemiyAnimation.SetBool("Run", true);
                     transform.Translate(Vector3.right * speedRun * Time.deltaTime);
                     transform.rotation = Quaternion.Euler(0,0,0);
-                    animator.SetBool("Attack", false);
+                    enemiyAnimation.SetBool("Attack", false);
                 }
-                else 
+                else if (transform.position.x > target.transform.position.x && 
+                        transform.position.y - target.transform.position.y < maxRangeViewOnY)
                 {
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Run", true);
+                    enemiyAnimation.SetBool("Walk", false);
+                    enemiyAnimation.SetBool("Run", true);
                     transform.Translate(Vector3.right * speedRun * Time.deltaTime);
                     transform.rotation = Quaternion.Euler(0,180,0);
-                    animator.SetBool("Attack", false);
+                    enemiyAnimation.SetBool("Attack", false);
                 }
+
             }
             else
             {
@@ -108,8 +125,8 @@ public class Enemy : MonoBehaviour
                     {
                         transform.rotation = Quaternion.Euler(0,180,0);
                     }
-                    animator.SetBool("Walk", false);
-                    animator.SetBool("Run", false);
+                    enemiyAnimation.SetBool("Walk", false);
+                    enemiyAnimation.SetBool("Run", false);
                 }
             }
         }
@@ -119,7 +136,7 @@ public class Enemy : MonoBehaviour
 
     public void FinalAnimation()
     {
-        animator.SetBool("Attack", false);
+        enemiyAnimation.SetBool("Attack", false);
         hitting = false;
         range.GetComponent<BoxCollider2D>().enabled = true;
     }
