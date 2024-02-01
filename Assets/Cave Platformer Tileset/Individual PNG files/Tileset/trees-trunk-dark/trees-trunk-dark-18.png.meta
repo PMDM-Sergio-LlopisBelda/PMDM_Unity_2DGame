@@ -1,12 +1,12 @@
 fileFormatVersion: 2
-guid: 7d5676e9c50b8764d81a045a3070707e
+guid: 40aaa803fb01129aaa8faa458240878c
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
   serializedVersion: 12
   mipmaps:
     mipMapMode: 0
-    enableMipMap: 1
+    enableMipMap: 0
     sRGBTexture: 1
     linearTexture: 0
     fadeOut: 0
@@ -30,7 +30,7 @@ TextureImporter:
   generateCubemap: 6
   cubemapConvolution: 0
   seamlessCubemap: 0
-  textureFormat: -1
+  textureFormat: 1
   maxTextureSize: 2048
   textureSettings:
     serializedVersion: 2
@@ -63,9 +63,9 @@ TextureImporter:
   compressionQualitySet: 0
   textureFormatSet: 0
   ignorePngGamma: 0
-  applyGammaDecoding: 1
+  applyGammaDecoding: 0
   swizzle: 50462976
-  cookieLightType: 1
+  cookieLightType: 0
   platformSettings:
   - serializedVersion: 3
     buildTarget: DefaultTexturePlatform
