@@ -303,7 +303,7 @@ MonoBehaviour:
   actualHp: 0
   parentObject: {fileID: 7023779216137706592}
   bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
-  loot: {fileID: 0}
+  loot: {fileID: 8729559498496336925, guid: c884188763519447d8b66c8b8731d33d, type: 3}
 --- !u!1 &1568154060251283879
 GameObject:
   m_ObjectHideFlags: 0
@@ -608,7 +608,7 @@ GameObject:
   - component: {fileID: 8675562277996275470}
   m_Layer: 7
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
