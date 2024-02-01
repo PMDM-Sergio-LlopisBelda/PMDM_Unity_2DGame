@@ -36,7 +36,7 @@ public class SwordAttack : MonoBehaviour
         canAttack = false;
         playerController.canMove = false;
         DealDamage();
-        //hpManager.TakeDamage(5);
+        hpManager.TakeDamage(5);
         animator.SetTrigger("IsAttacking");
         yield return new WaitForSeconds(0.35f);
         canAttack = true;

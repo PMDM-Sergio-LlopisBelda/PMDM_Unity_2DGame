@@ -3,24 +3,17 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - Enemy
-  - Gold
-  - ShopChest
-  - HealingFountain
-  - BossArenaDetector
-  - CaveLevelEnd
-  - KillArea
+  tags: []
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - Player
+  - 
   - Water
   - UI
-  - Ground
-  - Enemy
-  - Gold
+  - 
+  - 
+  - 
   - 
   - 
   - 
@@ -47,16 +40,4 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
-    locked: 0
-  - name: Background
-    uniqueID: 344654389
-    locked: 0
-  - name: Character
-    uniqueID: 3178195691
-    locked: 0
-  - name: Foreground
-    uniqueID: 3808609603
-    locked: 0
-  - name: UI
-    uniqueID: 3291079281
     locked: 0
