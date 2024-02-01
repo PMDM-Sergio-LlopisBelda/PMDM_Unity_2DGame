@@ -12,6 +12,9 @@ public class HpBarController : MonoBehaviour
     void Start()
     {
         hpSlider = GetComponent<Slider>();
+        if (hpManager.tag.Equals("Player")) {
+            hpSlider.maxValue = GameManager.playerMaxHp;
+        } else 
         hpSlider.maxValue = hpManager.maxHp;
     }
 

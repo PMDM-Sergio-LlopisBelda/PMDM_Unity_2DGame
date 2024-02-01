@@ -5,6 +5,12 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Gold
+  - ShopChest
+  - HealingFountain
+  - BossArenaDetector
+  - CaveLevelEnd
+  - KillArea
   layers:
   - Default
   - TransparentFX
@@ -14,7 +20,7 @@ TagManager:
   - UI
   - Ground
   - Enemy
-  - 
+  - Gold
   - 
   - 
   - 

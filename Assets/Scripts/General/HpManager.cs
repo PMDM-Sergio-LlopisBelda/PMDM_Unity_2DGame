@@ -9,12 +9,16 @@ public class HpManager : MonoBehaviour
     private Animator animator;
     private float distanceToMove = 10;
     public GameObject parentObject;
-
     public ParticleSystem bloodParticles;
+    public GameObject loot;
+    public Collider2D[] bossDors;
 
     // Start is called before the first frame update
     void Start()
     {
+        if (gameObject.tag.Equals("Player")) {
+            maxHp = GameManager.playerMaxHp;
+        }
         actualHp = maxHp;
         animator = GetComponent<Animator>();
     }
@@ -24,6 +28,7 @@ public class HpManager : MonoBehaviour
     {
         if (actualHp <= 0) {
             if (parentObject != null) {
+                Instantiate(loot, transform.position, Quaternion.identity);
                 Destroy(parentObject);
             } else {
                 Destroy(gameObject);
@@ -34,14 +39,27 @@ public class HpManager : MonoBehaviour
     public void TakeDamage(float damage) {
         if (actualHp > 0f) {
             animator.SetTrigger("isDamaged");
-            Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 1.0f);
+            Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 2.0f);
             actualHp -= damage;
+
+            if (bossDors != null) {
+                for(int i = 0; i < bossDors.Length; i++) {
+                bossDors[i].enabled = false;
+            } 
+            }
+
             //PushWhenDamaged();
         }
     }
 
     private void PushWhenDamaged() {
         transform.Translate(-transform.forward * distanceToMove);
+    }
+
+    public void Heal() {
+        if (actualHp < maxHp) {
+            actualHp++;
+        }
     }
 
 }
