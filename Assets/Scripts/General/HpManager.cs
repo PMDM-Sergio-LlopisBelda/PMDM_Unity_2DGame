@@ -11,6 +11,7 @@ public class HpManager : MonoBehaviour
     public GameObject parentObject;
     public ParticleSystem bloodParticles;
     public GameObject loot;
+    public Collider2D[] bossDors;
 
     // Start is called before the first frame update
     void Start()
@@ -40,12 +41,25 @@ public class HpManager : MonoBehaviour
             animator.SetTrigger("isDamaged");
             Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 2.0f);
             actualHp -= damage;
+
+            if (bossDors != null) {
+                for(int i = 0; i < bossDors.Length; i++) {
+                bossDors[i].enabled = false;
+            } 
+            }
+
             //PushWhenDamaged();
         }
     }
 
     private void PushWhenDamaged() {
         transform.Translate(-transform.forward * distanceToMove);
+    }
+
+    public void Heal() {
+        if (actualHp < maxHp) {
+            actualHp++;
+        }
     }
 
 }
