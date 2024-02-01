@@ -303,6 +303,7 @@ MonoBehaviour:
   actualHp: 0
   parentObject: {fileID: 7023779216137706592}
   bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+  loot: {fileID: 0}
 --- !u!1 &1568154060251283879
 GameObject:
   m_ObjectHideFlags: 0

@@ -13,7 +13,7 @@ public class PlayerController : MonoBehaviour
     public bool isGrounded = true;
     public bool canMove = true;
     public float scale = 0.7f;
-    public ShopChestHandler shopChestHandler;    
+    //public ShopChestHandler shopChestHandler;    
 
     void Start () 
     {
@@ -63,7 +63,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator OpenShopChest() {
         if (GameManager.canOpenShopChest) {
-            shopChestHandler.HandleOpenChest();
+            //shopChestHandler.HandleOpenChest();
             GameManager.canOpenShopChest = false;
             yield return new WaitForSeconds(10f);
         }
