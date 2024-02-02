@@ -574,7 +574,7 @@ Rigidbody2D:
   m_Interpolate: 0
   m_SleepingMode: 1
   m_CollisionDetection: 0
-  m_Constraints: 0
+  m_Constraints: 4
 --- !u!114 &1503047573397069808
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -619,6 +619,7 @@ MonoBehaviour:
   parentObject: {fileID: 127989908170807833}
   bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
   loot: {fileID: 8729559498496336925, guid: c884188763519447d8b66c8b8731d33d, type: 3}
+  bossDors: []
 --- !u!1 &8022824602152285273
 GameObject:
   m_ObjectHideFlags: 0

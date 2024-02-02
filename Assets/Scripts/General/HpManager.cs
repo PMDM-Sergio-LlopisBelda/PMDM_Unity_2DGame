@@ -12,6 +12,7 @@ public class HpManager : MonoBehaviour
     public ParticleSystem bloodParticles;
     public GameObject loot;
     public Collider2D[] bossDors;
+    private LevelInterface levelInterface;
 
     // Start is called before the first frame update
     void Start()
@@ -21,6 +22,7 @@ public class HpManager : MonoBehaviour
         }
         actualHp = maxHp;
         animator = GetComponent<Animator>();
+        levelInterface = FindAnyObjectByType<LevelInterface>();
     }
 
     // Update is called once per frame
@@ -44,6 +46,7 @@ public class HpManager : MonoBehaviour
             animator.SetTrigger("isDamaged");
             if (bloodParticles != null) {
                 Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 2.0f);
+                levelInterface.SpawnParticles(transform, bloodParticles);
             }
             actualHp -= damage;
             if (bossDors != null) {

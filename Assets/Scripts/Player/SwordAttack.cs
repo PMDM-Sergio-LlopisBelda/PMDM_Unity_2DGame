@@ -13,6 +13,7 @@ public class SwordAttack : MonoBehaviour
     public float timeBetweenAttacks = 1f;
     public float timeLastAttack = 0f;
     private PlayerController playerController;
+    private bool attackingWithButtons = false;
 
     // Start is called before the first frame update
     void Start()
@@ -21,27 +22,23 @@ public class SwordAttack : MonoBehaviour
         enemyLayer = LayerMask.GetMask("Enemy");
         hpManager = GetComponent<HpManager>();
         playerController = GetComponent<PlayerController>();
+        damage = GameManager.playerDmg;
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (timeLastAttack > 0) {
-            timeLastAttack -= Time.deltaTime;
-        } else {
-            canAttack = true;
-        }
-
         damage = GameManager.playerDmg;
-        if (Input.GetMouseButton(0) && canAttack)
+        if (Input.GetMouseButton(0) && canAttack && !attackingWithButtons)
         {
-            canAttack = false;
-            playerController.canMove = false;
-            DealDamage();
-            //hpManager.TakeDamage(5);
-            animator.SetTrigger("IsAttacking");
-            playerController.canMove = true;
-            timeLastAttack = timeBetweenAttacks;
+            StartCoroutine(PlayerAttacks());
+        }
+    }
+
+    public void AttackByButton() {
+        attackingWithButtons = true;
+        if (canAttack || ! attackingWithButtons) {
+            StartCoroutine(PlayerAttacks());
         }
     }
 
@@ -54,8 +51,8 @@ public class SwordAttack : MonoBehaviour
         animator.SetTrigger("IsAttacking");
         yield return new WaitForSeconds(0.35f);
         playerController.canMove = true;
-        timeLastAttack = timeBetweenAttacks;
-        yield return null;
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
     }
 
     private void DealDamage()
