@@ -11,6 +11,7 @@ TagManager:
   - BossArenaDetector
   - CaveLevelEnd
   - KillArea
+  - ShopLevelEnd
   layers:
   - Default
   - TransparentFX

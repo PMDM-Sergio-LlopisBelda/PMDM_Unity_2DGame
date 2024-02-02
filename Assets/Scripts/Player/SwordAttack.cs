@@ -11,6 +11,7 @@ public class SwordAttack : MonoBehaviour
     private LayerMask enemyLayer;
     private HpManager hpManager;
     private PlayerController playerController;
+    private bool attackingWithButtons = false;
 
     // Start is called before the first frame update
     void Start()
@@ -19,14 +20,22 @@ public class SwordAttack : MonoBehaviour
         enemyLayer = LayerMask.GetMask("Enemy");
         hpManager = GetComponent<HpManager>();
         playerController = GetComponent<PlayerController>();
+        damage = GameManager.playerDmg;
     }
 
     // Update is called once per frame
     void Update()
     {
         damage = GameManager.playerDmg;
-        if (Input.GetMouseButton(0) && canAttack)
+        if (Input.GetMouseButton(0) && canAttack && !attackingWithButtons)
         {
+            StartCoroutine(PlayerAttacks());
+        }
+    }
+
+    public void AttackByButton() {
+        attackingWithButtons = true;
+        if (canAttack || ! attackingWithButtons) {
             StartCoroutine(PlayerAttacks());
         }
     }
@@ -39,8 +48,9 @@ public class SwordAttack : MonoBehaviour
         //hpManager.TakeDamage(5);
         animator.SetTrigger("IsAttacking");
         yield return new WaitForSeconds(0.35f);
-        canAttack = true;
         playerController.canMove = true;
+        yield return new WaitForSeconds(1f);
+        canAttack = true;
 
     }
 
