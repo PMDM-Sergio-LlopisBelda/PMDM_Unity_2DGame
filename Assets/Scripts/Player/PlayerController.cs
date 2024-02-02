@@ -23,7 +23,7 @@ public class PlayerController : MonoBehaviour
 
     void Start () 
     {
-        //animator = GetComponent<Animator> ();
+        //animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D> ();
         hpManager = GetComponent<HpManager>();
     }
@@ -99,6 +99,7 @@ public class PlayerController : MonoBehaviour
     {
         if (collider.gameObject.tag == "Gold") {
             GameManager.coindsCollected++;
+            GameManager.totalCoins++;
             Destroy(collider.gameObject);
         }
         if (collider.gameObject.tag == "ShopChest") {
