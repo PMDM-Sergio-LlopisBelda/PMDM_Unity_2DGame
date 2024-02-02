@@ -30,18 +30,19 @@ public class HpManager : MonoBehaviour
     void Update()
     {
         if (actualHp <= 0) {
-            if (parentObject != null) {
+            if (parentObject != null && gameObject.tag.Equals("Enemy")) {
+                print("AAAAAAAAAAAAAAAAAAA");
                 if (loot != null) {
                     Instantiate(loot, transform.position, Quaternion.identity);
                 }
                 
                 Destroy(parentObject);
-            } else {
-                if (gameObject.tag.Equals("Player")) {
-                    SceneManager.LoadScene("DeathMenu");
-                }
-                Destroy(gameObject);
             }
+            if (gameObject.tag.Equals("Player")) {
+                SceneManager.LoadScene("DeathMenu");
+                //Destroy(gameObject); 
+            }
+            
         }
     }
 
@@ -50,7 +51,7 @@ public class HpManager : MonoBehaviour
             animator.SetTrigger("isDamaged");
             if (bloodParticles != null) {
                 Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 2.0f);
-                levelInterface.SpawnParticles(transform, bloodParticles);
+                //levelInterface.SpawnParticles(transform, bloodParticles);
             }
             actualHp -= damage;
             if (bossDors != null) {

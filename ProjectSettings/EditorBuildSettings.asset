@@ -9,12 +9,18 @@ EditorBuildSettings:
     path: Assets/Scenes/SampleScene.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/SceneMenu.unity
+    guid: b01a38c7760de5ea0b0b75cf2974424a
+  - enabled: 1
     path: Assets/Scenes/Begin.unity
     guid: 57a40371c20137a669f0df72f19886b3
+  - enabled: 1
+    path: Assets/Scenes/ShopScene.unity
+    guid: 8b2197505686432758669f0b3bbc9353
   - enabled: 1
     path: Assets/Scenes/CaveLevel.unity
     guid: 071507a2ebdd9a356915da7f8e7ea111
   - enabled: 1
-    path: Assets/Scenes/ShopScene.unity
-    guid: 8b2197505686432758669f0b3bbc9353
+    path: Assets/Scenes/DeathMenu.unity
+    guid: e11d71f86c5aca75eb1597c135807302
   m_configObjects: {}
