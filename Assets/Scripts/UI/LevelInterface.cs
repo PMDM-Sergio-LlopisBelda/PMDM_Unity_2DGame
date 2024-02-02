@@ -27,6 +27,7 @@ public class LevelInterface : MonoBehaviour
     }
 
     public void MoveLeftButtonDown() {
+        print("ANAL SEX");
         movesLeft = true;
         StartCoroutine(MoveLeft());
     }

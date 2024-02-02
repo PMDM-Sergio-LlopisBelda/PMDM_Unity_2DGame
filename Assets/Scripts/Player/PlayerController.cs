@@ -100,7 +100,12 @@ public class PlayerController : MonoBehaviour
         if (collider.gameObject.tag == "Gold") {
             GameManager.coindsCollected++;
             GameManager.totalCoins++;
-            Destroy(collider.gameObject);
+            SpriteRenderer spriteRenderer = collider.GetComponent<SpriteRenderer>();
+            spriteRenderer.enabled = false;
+            AudioSource audioSource = collider.GetComponent<AudioSource>();
+            audioSource.Play();
+            collider.enabled = false;
+            Destroy(collider.gameObject, 2f);
         }
         if (collider.gameObject.tag == "ShopChest") {
             StartCoroutine(OpenShopChest());

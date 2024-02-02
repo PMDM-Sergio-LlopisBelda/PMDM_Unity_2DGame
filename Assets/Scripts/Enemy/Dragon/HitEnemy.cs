@@ -5,12 +5,14 @@ using UnityEngine;
 public class HittingEnemy : MonoBehaviour
 {
     public float damage = 5;
+    public AudioSource hitSound;
 
 
     void OnTriggerEnter2D(Collider2D collider)
     {
         if (collider.CompareTag("Player")) {
-            collider.GetComponent<HpManager>().TakeDamage(damage);   
+            collider.GetComponent<HpManager>().TakeDamage(damage);
+            hitSound.Play();
         }
     }
 
