@@ -121,6 +121,10 @@ public class PlayerController : MonoBehaviour
             SceneManager.LoadScene("CaveLevel");
         }
 
+        if (collider.gameObject.tag == "FirstLevelEnd") {
+            SceneManager.LoadScene("ShopScene");
+        }
+
         if (collider.gameObject.tag == "KillArea") {
             hpManager.actualHp = 0;
         }
