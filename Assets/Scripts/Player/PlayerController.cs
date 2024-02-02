@@ -18,6 +18,7 @@ public class PlayerController : MonoBehaviour
     private HpManager hpManager;
     public Collider2D[] bossDors;
     public bool playingWithButtons = false;
+    public AudioSource[] audios;
 
     private bool canHeal = false;
 
@@ -26,6 +27,7 @@ public class PlayerController : MonoBehaviour
         //animator = GetComponent<Animator>();
         rigidbody2d = GetComponent<Rigidbody2D> ();
         hpManager = GetComponent<HpManager>();
+        audios = GetComponents<AudioSource>();
     }
     void Update () 
     {
