@@ -119,7 +119,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (collider.gameObject.tag == "CaveLevelEnd") {
-            SceneManager.LoadScene("MainMenu");
+            SceneManager.LoadScene("SceneMenu");
         }
 
         if (collider.gameObject.tag == "ShopLevelEnd") {

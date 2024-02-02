@@ -14,6 +14,7 @@ public class SwordAttack : MonoBehaviour
     public float timeLastAttack = 0f;
     private PlayerController playerController;
     private bool attackingWithButtons = false;
+    public AudioSource audioSource;
 
     // Start is called before the first frame update
     void Start()
@@ -44,6 +45,7 @@ public class SwordAttack : MonoBehaviour
 
     IEnumerator PlayerAttacks()
     {
+        audioSource.Play();
         canAttack = false;
         playerController.canMove = false;
         DealDamage();
