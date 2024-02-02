@@ -26,6 +26,7 @@ public class RangeVisionEnemy : MonoBehaviour
             {
                 enemyAnimator.SetBool("Walk", false);
                 enemyAnimator.SetBool("Run", false);
+                enemy.audios.Play();
                 enemyAnimator.SetBool("Attack", true);  
                 enemy.hitting = true;
                 GetComponent<BoxCollider2D>().enabled = false;

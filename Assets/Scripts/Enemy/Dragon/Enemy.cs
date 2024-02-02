@@ -24,6 +24,7 @@ public class Enemy : MonoBehaviour
     public  GameObject Hit;
     public Animator enemiyAnimation;
     public GameObject target;
+    public AudioSource audios;
 
     public Rigidbody2D rb;
 
@@ -34,6 +35,7 @@ public class Enemy : MonoBehaviour
         target = GameObject.Find("Player");
         transform.localScale.Set(scale, scale, scale);
         rb = GetComponent<Rigidbody2D>();
+        audios = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
