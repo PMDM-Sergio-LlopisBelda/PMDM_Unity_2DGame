@@ -12,6 +12,8 @@ TagManager:
   - CaveLevelEnd
   - KillArea
   - ShopLevelEnd
+  - MovePlatform
+  - FirstLevelEnd
   layers:
   - Default
   - TransparentFX
