@@ -28,7 +28,10 @@ public class HpManager : MonoBehaviour
     {
         if (actualHp <= 0) {
             if (parentObject != null) {
-                Instantiate(loot, transform.position, Quaternion.identity);
+                if (loot != null) {
+                    Instantiate(loot, transform.position, Quaternion.identity);
+                }
+                
                 Destroy(parentObject);
             } else {
                 Destroy(gameObject);
@@ -39,9 +42,10 @@ public class HpManager : MonoBehaviour
     public void TakeDamage(float damage) {
         if (actualHp > 0f) {
             animator.SetTrigger("isDamaged");
-            Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 2.0f);
+            if (bloodParticles != null) {
+                Destroy(Instantiate(bloodParticles, transform.position, Quaternion.identity), 2.0f);
+            }
             actualHp -= damage;
-
             if (bossDors != null) {
                 for(int i = 0; i < bossDors.Length; i++) {
                 bossDors[i].enabled = false;

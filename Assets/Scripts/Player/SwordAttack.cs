@@ -10,6 +10,8 @@ public class SwordAttack : MonoBehaviour
     public Collider2D damageArea;
     private LayerMask enemyLayer;
     private HpManager hpManager;
+    public float timeBetweenAttacks = 1f;
+    public float timeLastAttack = 0f;
     private PlayerController playerController;
 
     // Start is called before the first frame update
@@ -24,10 +26,22 @@ public class SwordAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (timeLastAttack > 0) {
+            timeLastAttack -= Time.deltaTime;
+        } else {
+            canAttack = true;
+        }
+
         damage = GameManager.playerDmg;
         if (Input.GetMouseButton(0) && canAttack)
         {
-            StartCoroutine(PlayerAttacks());
+            canAttack = false;
+            playerController.canMove = false;
+            DealDamage();
+            //hpManager.TakeDamage(5);
+            animator.SetTrigger("IsAttacking");
+            playerController.canMove = true;
+            timeLastAttack = timeBetweenAttacks;
         }
     }
 
@@ -39,9 +53,9 @@ public class SwordAttack : MonoBehaviour
         //hpManager.TakeDamage(5);
         animator.SetTrigger("IsAttacking");
         yield return new WaitForSeconds(0.35f);
-        canAttack = true;
         playerController.canMove = true;
-
+        timeLastAttack = timeBetweenAttacks;
+        yield return null;
     }
 
     private void DealDamage()
