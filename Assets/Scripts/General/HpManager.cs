@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class HpManager : MonoBehaviour
 {
@@ -36,6 +37,9 @@ public class HpManager : MonoBehaviour
                 
                 Destroy(parentObject);
             } else {
+                if (gameObject.tag.Equals("Player")) {
+                    SceneManager.LoadScene("DeathMenu");
+                }
                 Destroy(gameObject);
             }
         }
