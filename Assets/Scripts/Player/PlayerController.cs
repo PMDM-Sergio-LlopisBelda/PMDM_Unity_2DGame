@@ -9,7 +9,7 @@ public class PlayerController : MonoBehaviour
     public float lateralMovement = 2.0f;
     public float jumpMovement = 400.0f;
     public Transform groundCheck;
-    private Animator animator;
+    public Animator animator;
     public Rigidbody2D rigidbody2d;
     public bool isGrounded = true;
     public bool canMove = true;
@@ -17,12 +17,13 @@ public class PlayerController : MonoBehaviour
     public ShopChestHandler shopChestHandler;
     private HpManager hpManager;
     public Collider2D[] bossDors;
+    public bool playingWithButtons = false;
 
     private bool canHeal = false;
 
     void Start () 
     {
-        animator = GetComponent<Animator> ();
+        //animator = GetComponent<Animator> ();
         rigidbody2d = GetComponent<Rigidbody2D> ();
         hpManager = GetComponent<HpManager>();
     }
@@ -40,8 +41,9 @@ public class PlayerController : MonoBehaviour
             LayerMask.GetMask("Enemy"));
         }
 
-        if (isGrounded && Input.GetButtonDown("Jump")) {
+        if (isGrounded && Input.GetButtonDown("Jump") && !playingWithButtons) {
             rigidbody2d.AddForce (Vector2.up * jumpMovement);
+            isGrounded = false;
         }
         
         if (isGrounded) {
@@ -50,10 +52,12 @@ public class PlayerController : MonoBehaviour
             animator.SetTrigger("Jump");
         }
 
-        if (canMove) {
-            Speed = Input.GetAxis("Horizontal") * lateralMovement;
-            transform.Translate (Vector2.right * Speed * Time.deltaTime);
-            animator.SetFloat("Speed", Mathf.Abs(Speed));
+        if (!playingWithButtons) {
+            if (canMove) {
+                Speed = Input.GetAxis("Horizontal") * lateralMovement;
+                transform.Translate (Vector2.right * Speed * Time.deltaTime);
+                animator.SetFloat("Speed", Mathf.Abs(Speed));
+            }
         }
 
 
@@ -61,6 +65,33 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(-scale, scale, scale);
         } else if (Speed > 0){
             transform.localScale = new Vector3(scale, scale, scale);
+        }
+    }
+
+    public void MoveLeft() {
+        if (canMove) {
+            Speed = -lateralMovement;
+            transform.Translate (Vector2.right * Speed * Time.deltaTime);
+            animator.SetFloat("Speed", Mathf.Abs(Speed));
+            playingWithButtons = true;
+        }
+    }
+
+    public void MoveRight() {
+        if (canMove) {
+            Speed = lateralMovement;
+            transform.Translate (Vector2.right * Speed * Time.deltaTime);
+            animator.SetFloat("Speed", Mathf.Abs(Speed));
+            playingWithButtons = true;
+        }
+    }
+
+    public void JumpByButton() {
+        if (isGrounded) {
+            isGrounded = false;
+            animator.SetTrigger("Jump");
+            rigidbody2d.AddForce (Vector2.up * jumpMovement);
+            playingWithButtons = true;
         }
     }
 
@@ -83,6 +114,10 @@ public class PlayerController : MonoBehaviour
 
         if (collider.gameObject.tag == "CaveLevelEnd") {
             SceneManager.LoadScene("MainMenu");
+        }
+
+        if (collider.gameObject.tag == "ShopLevelEnd") {
+            SceneManager.LoadScene("CaveLevel");
         }
 
         if (collider.gameObject.tag == "KillArea") {
