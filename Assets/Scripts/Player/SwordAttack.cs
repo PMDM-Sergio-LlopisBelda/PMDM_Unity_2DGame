@@ -10,6 +10,8 @@ public class SwordAttack : MonoBehaviour
     public Collider2D damageArea;
     private LayerMask enemyLayer;
     private HpManager hpManager;
+    public float timeBetweenAttacks = 1f;
+    public float timeLastAttack = 0f;
     private PlayerController playerController;
     private bool attackingWithButtons = false;
 
@@ -51,7 +53,6 @@ public class SwordAttack : MonoBehaviour
         playerController.canMove = true;
         yield return new WaitForSeconds(1f);
         canAttack = true;
-
     }
 
     private void DealDamage()
