@@ -7,12 +7,12 @@ public class Enemy : MonoBehaviour
 
     [Header("Atributes")]
     public float routine;
-    public float crono;
-    public int direcction;
+    private float crono;
+    private int direcction;
     public float speedWalk;
     public float speedRun;
     public bool hitting;
-    public bool isWithinReach;
+    private bool isWithinReach;
     public float scale = 0.85f; 
     private float maxRangeViewOnY = 0.5f; 
     //public RectTransform hpBar;
@@ -23,9 +23,9 @@ public class Enemy : MonoBehaviour
     public  GameObject range;
     public  GameObject Hit;
     public Animator enemiyAnimation;
-    public GameObject target;
-    public AudioSource audios;
-    public Rigidbody2D rb;
+    private GameObject target;
+    public AudioSource sound;
+    private Rigidbody2D rb;
 
 
     void Start()
@@ -34,7 +34,7 @@ public class Enemy : MonoBehaviour
         target = GameObject.Find("Player");
         transform.localScale.Set(scale, scale, scale);
         rb = GetComponent<Rigidbody2D>();
-        audios = GetComponent<AudioSource>();
+        sound = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -138,9 +138,15 @@ public class Enemy : MonoBehaviour
         Hit.GetComponent<BoxCollider2D>().enabled = true;
     } 
 
-        public void SetColliderWeaponFalse()
+    public void SetColliderWeaponFalse()
     {
         Hit.GetComponent<BoxCollider2D>().enabled = false;
     } 
 
+    public void PlaySound() {
+        if (sound != null ){
+            sound.Play();
+        }
+        
+    }
 }

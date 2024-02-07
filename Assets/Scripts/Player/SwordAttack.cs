@@ -9,7 +9,7 @@ public class SwordAttack : MonoBehaviour
     private bool canAttack = true;
     public Collider2D damageArea;
     private LayerMask enemyLayer;
-    private HpManager hpManager;
+    private HpManagerPlayer hpManagerPlayer;
     public float timeBetweenAttacks = 1f;
     public float timeLastAttack = 0f;
     private PlayerController playerController;
@@ -21,7 +21,7 @@ public class SwordAttack : MonoBehaviour
     {
         animator = GetComponent<Animator>();
         enemyLayer = LayerMask.GetMask("Enemy");
-        hpManager = GetComponent<HpManager>();
+        hpManagerPlayer = GetComponent<HpManagerPlayer>();
         playerController = GetComponent<PlayerController>();
         damage = GameManager.playerDmg;
     }
@@ -29,22 +29,25 @@ public class SwordAttack : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        damage = GameManager.playerDmg;
-        if (Input.GetMouseButton(0) && canAttack && !attackingWithButtons)
-        {
-            StartCoroutine(PlayerAttacks());
+        if (!playerController.playingWithButtons) {
+            if (Input.GetMouseButton(0) && canAttack && playerController.isGrounded)
+            {
+                StartCoroutine(PlayerAttacks());
+            }
         }
     }
 
     public void AttackByButton() {
-        attackingWithButtons = true;
-        if (canAttack || ! attackingWithButtons) {
-            StartCoroutine(PlayerAttacks());
+        if (playerController.playingWithButtons) {
+            if (canAttack && playerController.isGrounded) {
+                StartCoroutine(PlayerAttacks());
+            }
         }
     }
 
     IEnumerator PlayerAttacks()
     {
+        damage = GameManager.playerDmg;
         audioSource.Play();
         canAttack = false;
         playerController.canMove = false;
@@ -63,18 +66,13 @@ public class SwordAttack : MonoBehaviour
 
         foreach (Collider2D enemy in hitEnemies)
         {
-            HpManager enemyHpManager = enemy.GetComponent<HpManager>();
+            HpManagerEnemy1 hpManagerEnemy1 = enemy.GetComponent<HpManagerEnemy1>();
 
-            if (enemyHpManager != null) {
-                enemyHpManager.TakeDamage(damage);
+            if (hpManagerEnemy1 != null) {
+                hpManagerEnemy1.TakeDamage(damage);
             }
 
         }
     }
 
-    /*private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireCube(damageArea.bounds.center, damageArea.bounds.size);
-    }*/
 }

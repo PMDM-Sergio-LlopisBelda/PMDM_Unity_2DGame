@@ -1,75 +1,48 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class LevelInterface : MonoBehaviour
 {
     public Text coinText;
-    public PlayerController playerController;
-    public SwordAttack swordAttack;
-    private bool movesLeft = false;
-    private bool movesRight = false;
-    // Start is called before the first frame update
+    public Text bonusDamage;
+    public Text bonusHealth;
+    public GameObject left;
+    public GameObject right;
+    public GameObject jump;
+    public GameObject attack;
+
     void Start()
     {
-        
+        #if UNITY_EDITOR 
+        {
+            EnableButtons(false);
+        }
+        #else
+        {
+            EnableButtons(true);
+        }
+        #endif
     }
-
-    // Update is called once per frame
+    
     void Update()
     {
         coinText.text = GameManager.coindsCollected.ToString();
+        bonusDamage.text = "Damage: " + GameManager.playerDmg + " points";
+        bonusHealth.text = "Max. HP: " +  GameManager.playerMaxHp + " points";
     }
 
-    public void SpawnParticles(Transform particleTransform, ParticleSystem particle) {
-        Destroy(Instantiate(particle, particleTransform.position, Quaternion.identity), 2.0f);
-    }
+    private void EnableButtons(bool enable) {
+        left.GetComponent<Button>().enabled = false;
+        left.SetActive(enable);
 
-    public void MoveLeftButtonDown() {
-        print("ANAL SEX");
-        movesLeft = true;
-        StartCoroutine(MoveLeft());
-    }
+        right.GetComponent<Button>().enabled = false;
+        right.SetActive(enable);
 
-    public void MoveLeftButtonUp() {
-        playerController.Speed = 0;
-        playerController.animator.SetFloat("Speed", 0);
-        movesLeft = false;
-    }
+        jump.GetComponent<Button>().enabled = false;
+        jump.SetActive(enable);
 
-    public void MoveRightButtonDown() {
-        movesRight = true;
-        StartCoroutine(MoveRight());
-    }
+        attack.GetComponent<Button>().enabled = false;
+        attack.SetActive(enable);
+    }   
 
-    public void MoveRightButtonUp() {
-        playerController.Speed = 0;
-        playerController.animator.SetFloat("Speed", 0);
-        movesRight = false;
-    }
-
-    IEnumerator MoveLeft() {
-        while (movesLeft) {
-            playerController.MoveLeft();
-            yield return null;
-        }
-    }
-
-    IEnumerator MoveRight() {
-        while (movesRight) {
-            playerController.MoveRight();
-            yield return null;
-        }
-    }
-
-    public void AttackButton() {
-        swordAttack.AttackByButton();
-    }
-
-    public void JumpButton() {
-        playerController.JumpByButton();
-    }
-
-    
 }

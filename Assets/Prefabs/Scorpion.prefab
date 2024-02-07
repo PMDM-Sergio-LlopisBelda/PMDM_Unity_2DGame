@@ -35,7 +35,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.0000038146973, y: -0.00000667572}
+  m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &1170841327907534896
@@ -103,7 +103,7 @@ Transform:
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -21.94, y: -6.18, z: -0.017441986}
   m_LocalScale: {x: 1, y: 1, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 8826909931067551047}
   - {fileID: 8703424038587215318}
@@ -120,7 +120,6 @@ GameObject:
   - component: {fileID: 4671156143548717430}
   - component: {fileID: 2890570999442081457}
   - component: {fileID: 719800049671346036}
-  - component: {fileID: 5208358531408446655}
   m_Layer: 0
   m_Name: Hit
   m_TagString: Untagged
@@ -175,7 +174,7 @@ BoxCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0.16664118, y: 0.43734193}
+  m_Offset: {x: 0.04255565, y: 0.4279909}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -186,7 +185,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.25992417, y: 0.17221391}
+  m_Size: {x: 0.09, y: 0.113224864}
   m_EdgeRadius: 0
 --- !u!114 &719800049671346036
 MonoBehaviour:
@@ -200,104 +199,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1683adb740330c6c9b7154de722e6366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 7
-  hitSound: {fileID: 5208358531408446655}
---- !u!82 &5208358531408446655
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 321403864017166416}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 4908da28c84ca22daa5cc3ca1391a780, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
+  damage: 3.5
 --- !u!1 &1585499825381224120
 GameObject:
   m_ObjectHideFlags: 0
@@ -401,8 +303,8 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2260708634980205778}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 90.01744}
-  m_LocalScale: {x: 0.021773716, y: 0.021773716, z: 0.021773716}
+  m_LocalPosition: {x: 0, y: 0, z: 0.017441986}
+  m_LocalScale: {x: 1, y: 0.032527, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 8696717320832338483}
@@ -410,8 +312,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -1.71, y: 6.5}
-  m_SizeDelta: {x: 48.5108, y: 9.8735}
+  m_AnchoredPosition: {x: 0.0293, y: 0.6894}
+  m_SizeDelta: {x: 1.4062, y: 4.2387}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!223 &549382478783875457
 Canvas:
@@ -430,7 +332,7 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
+  m_VertexColorAlwaysGammaSpace: 1
   m_AdditionalShaderChannelsFlag: 0
   m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: -1003888015
@@ -503,8 +405,8 @@ GameObject:
   - component: {fileID: 7439680788846125933}
   - component: {fileID: 7250108811074713584}
   - component: {fileID: 1503047573397069808}
-  - component: {fileID: 8949012007315691840}
-  - component: {fileID: 8032298125098563540}
+  - component: {fileID: 9079719522193187816}
+  - component: {fileID: 208869806737552043}
   m_Layer: 7
   m_Name: EnemyBody
   m_TagString: Enemy
@@ -520,9 +422,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4829377024921777530}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.66, y: 5.59, z: 0.017441986}
-  m_LocalScale: {x: 9.688479, y: 9.688479, z: 9.688479}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 9.96, y: 9.96, z: 9.96}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3535623653757471296}
@@ -687,22 +589,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   routine: 0
-  crono: 0
-  direcction: 0
   speedWalk: 1
   speedRun: 3
   hitting: 0
-  isWithinReach: 0
   scale: 1
   rangeVision: 8
-  rangeAttack: 0.62
+  rangeAttack: 0.6
   range: {fileID: 8178455940747382872}
   Hit: {fileID: 321403864017166416}
-  enemiyAnimation: {fileID: 0}
-  target: {fileID: 0}
-  audios: {fileID: 0}
-  rb: {fileID: 0}
---- !u!114 &8949012007315691840
+  enemiyAnimation: {fileID: 5873262171982845873}
+  sound: {fileID: 208869806737552043}
+--- !u!114 &9079719522193187816
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -711,16 +608,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 4829377024921777530}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fbdca44be73d13aa90ab53d795a74e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 585392bfe4f0f81c3a4773294adcc3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 20
   actualHp: 0
   parentObject: {fileID: 127989908170807833}
-  bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+  bloodParticles: {fileID: 6401112876060881144, guid: 74bc93bd2a5944d9bbebc1e5f074c084, type: 3}
   loot: {fileID: 8729559498496336925, guid: c884188763519447d8b66c8b8731d33d, type: 3}
   bossDors: []
---- !u!82 &8032298125098563540
+--- !u!82 &208869806737552043
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -732,7 +629,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 4908da28c84ca22daa5cc3ca1391a780, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 0.277
+  m_Volume: 0.377
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -826,7 +723,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8696717320832338483}
   - component: {fileID: 2728896333423459295}
-  - component: {fileID: 4129637257957498236}
+  - component: {fileID: 6033213857962687646}
   m_Layer: 5
   m_Name: HpBar
   m_TagString: Untagged
@@ -851,7 +748,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -0.000049591064, y: -0.00015926361}
+  m_AnchoredPosition: {x: -0.000061035156, y: -0.00015258789}
   m_SizeDelta: {x: -0.00009918213, y: 0.00030136108}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2728896333423459295
@@ -905,7 +802,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &4129637257957498236
+--- !u!114 &6033213857962687646
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -914,10 +811,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 8022824602152285273}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700d70f04584c834eb0e2d3d9b2c26d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 88fd3685a2cfd1b809c5a4239b8276a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpManager: {fileID: 8949012007315691840}
+  HpManagerEnemy1: {fileID: 9079719522193187816}
 --- !u!1 &8178455940747382872
 GameObject:
   m_ObjectHideFlags: 0
@@ -1010,5 +907,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 5873262171982845873}
   enemy: {fileID: 1503047573397069808}
-  timeBetweenAttacks: 4
+  timeBetweenAttacks: 2.5
   timeLastAttack: 0

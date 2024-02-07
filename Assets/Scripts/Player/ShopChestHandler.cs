@@ -10,6 +10,9 @@ public class ShopChestHandler : MonoBehaviour
     public Canvas mainCanvas;
     public Canvas shopCanvas;
     public GameObject gamePlayer;
+    public AudioSource openChest;
+    public AudioSource clicked;
+    
     // Start is called before the first frame update
     void Start()
     {
@@ -25,6 +28,7 @@ public class ShopChestHandler : MonoBehaviour
     public void HandleOpenChest() {
         coinText.text = "Coins: " + GameManager.coindsCollected.ToString();
         if (shopCanvas != null) {
+            openChest.Play();
             shopCanvas.enabled = true;
             gamePlayer.SetActive(false);
         }
@@ -34,6 +38,7 @@ public class ShopChestHandler : MonoBehaviour
     }
 
     public void ExitClick() {
+        clicked.Play();
         if (mainCanvas != null) {
             mainCanvas.enabled = true;
         }
@@ -41,10 +46,10 @@ public class ShopChestHandler : MonoBehaviour
             shopCanvas.enabled = false;
         }
         gamePlayer.SetActive(true);
-        //GameManager.canOpenShopChest = true;
     }
 
     public void HpClick() {
+        clicked.Play();
         if (GameManager.coindsCollected > 0) {
             GameManager.coindsCollected--;
             GameManager.playerMaxHp++;
@@ -53,6 +58,7 @@ public class ShopChestHandler : MonoBehaviour
     }
 
     public void DmgClick() {
+        clicked.Play();
         if (GameManager.coindsCollected > 0) {
             GameManager.coindsCollected--;
             GameManager.playerDmg++;
