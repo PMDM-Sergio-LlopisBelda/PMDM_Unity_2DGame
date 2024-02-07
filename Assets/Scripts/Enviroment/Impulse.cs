@@ -6,11 +6,6 @@ using UnityEngine;
 public class Impulse : MonoBehaviour
 {
 
-    [Header("Coordenates")]
-    public float x;
-    public float y;
-    public float z;
-    
     public float timeBetweenBombs;
     public GameObject bomb;
 
@@ -31,7 +26,7 @@ public class Impulse : MonoBehaviour
         while(true) 
         {
             Instantiate(bomb);
-            bomb.gameObject.GetComponent<Rigidbody2D>().transform.position = new Vector3(x, y, z);
+            bomb.gameObject.GetComponent<Rigidbody2D>().transform.position = transform.position;
             yield return new WaitForSeconds(timeBetweenBombs);
         }
     }

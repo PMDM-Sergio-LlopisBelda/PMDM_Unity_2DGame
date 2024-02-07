@@ -12,13 +12,11 @@ public class BombThroable : MonoBehaviour
     private Rigidbody2D rb;
     //private HpManager hpManager;
     public GameObject explotion;
-    private HpManager hpManager;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody2D>(); 
-        //hpManager = new HpManager();
         ThrowBomb(); 
     }
 
@@ -44,25 +42,15 @@ public class BombThroable : MonoBehaviour
                 float finalForce = forceExplotion/distance;
                 rb2d.AddForce(direction*finalForce);
                 if (coll.CompareTag("Player")) {
-                    HpManager enemyHpManager = coll.GetComponent<HpManager>();
-                    if (enemyHpManager != null) {
-                        enemyHpManager.TakeDamage(damage);
+                    HpManagerPlayer hpManagerPlayer = coll.GetComponent<HpManagerPlayer>();
+                    if (hpManagerPlayer != null) {
+                        hpManagerPlayer.TakeDamage(damage);
                     }
                 }
             }        
             
         }
         
-    }
-
-
-    void OnCollisionEnter2D(Collision2D other)
-    {
-        if (other.gameObject.CompareTag("Player"))
-        {
-            print("DAÑO");
-            //hpManager.TakeDamage(damage);
-        }
     }
 
 }

@@ -90,7 +90,8 @@ GameObject:
   - component: {fileID: 2507657104379382283}
   - component: {fileID: 2313556441412688713}
   - component: {fileID: 2834815732687752144}
-  - component: {fileID: 6147414238501731165}
+  - component: {fileID: 7666291113416085671}
+  - component: {fileID: 1358958226104372937}
   m_Layer: 7
   m_Name: EnemyBody
   m_TagString: Enemy
@@ -273,21 +274,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   routine: 0
-  crono: 0
-  direcction: 0
   speedWalk: 1
   speedRun: 3
   hitting: 0
-  isWithinReach: 0
   scale: 1
   rangeVision: 8
   rangeAttack: 0.62
   range: {fileID: 7536681950568464068}
   Hit: {fileID: 8269959643954367952}
-  enemiyAnimation: {fileID: 0}
-  target: {fileID: 0}
-  rb: {fileID: 0}
---- !u!114 &6147414238501731165
+  enemiyAnimation: {fileID: 4199319207955618112}
+  sound: {fileID: 1358958226104372937}
+--- !u!114 &7666291113416085671
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -296,15 +293,111 @@ MonoBehaviour:
   m_GameObject: {fileID: 1451064543221949115}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5fbdca44be73d13aa90ab53d795a74e9, type: 3}
+  m_Script: {fileID: 11500000, guid: 585392bfe4f0f81c3a4773294adcc3c9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   maxHp: 20
   actualHp: 0
   parentObject: {fileID: 7023779216137706592}
-  bloodParticles: {fileID: 7857207379780569710, guid: f482967df137e19e48167c62d0d267b4, type: 3}
+  bloodParticles: {fileID: 6401112876060881144, guid: 74bc93bd2a5944d9bbebc1e5f074c084, type: 3}
   loot: {fileID: 8729559498496336925, guid: c884188763519447d8b66c8b8731d33d, type: 3}
   bossDors: []
+--- !u!82 &1358958226104372937
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1451064543221949115}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 4e01d224d154374cd93abf91594db120, type: 3}
+  m_PlayOnAwake: 0
+  m_Volume: 0.249
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &1568154060251283879
 GameObject:
   m_ObjectHideFlags: 0
@@ -390,7 +483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6151367173726027442}
   - component: {fileID: 5555037474408417654}
-  - component: {fileID: 1530384346732674511}
+  - component: {fileID: 1947143544371761301}
   m_Layer: 5
   m_Name: HpBar
   m_TagString: Untagged
@@ -469,7 +562,7 @@ MonoBehaviour:
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &1530384346732674511
+--- !u!114 &1947143544371761301
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -478,10 +571,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 1650134467291643685}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 700d70f04584c834eb0e2d3d9b2c26d3, type: 3}
+  m_Script: {fileID: 11500000, guid: 88fd3685a2cfd1b809c5a4239b8276a5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hpManager: {fileID: 6147414238501731165}
+  HpManagerEnemy1: {fileID: 7666291113416085671}
 --- !u!1 &2507011446975143921
 GameObject:
   m_ObjectHideFlags: 0
@@ -723,7 +816,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyAnimator: {fileID: 4199319207955618112}
   enemy: {fileID: 2834815732687752144}
-  timeBetweenAttacks: 4
+  timeBetweenAttacks: 2
   timeLastAttack: 0
 --- !u!1 &8269959643954367952
 GameObject:
@@ -815,4 +908,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1683adb740330c6c9b7154de722e6366, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  damage: 5
+  damage: 2.5

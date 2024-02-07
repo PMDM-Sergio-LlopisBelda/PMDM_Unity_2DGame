@@ -1,35 +1,49 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class GameOverInterface : MonoBehaviour
 {
-
-    public Text text;
+    public AudioSource clickSound;
+    private float currentTime = 0f;
+    private float waitTime = 1f;
+    private bool exit = false;
+    private bool playAgain = false;
 
     // Start is called before the first frame update
     void Start()
     {
-        text.text = "Total Coins: " + GameManager.totalCoins;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if (currentTime > 0) {
+            currentTime -= Time.deltaTime;
+            if (currentTime <= 0 && playAgain) {
+                SceneManager.LoadScene("SceneMenu");
+            }
+            if (currentTime <= 0 && exit) {
+                #if UNITY_EDITOR
+                    UnityEditor.EditorApplication.isPlaying = false;
+                #else
+                    Application.Quit();
+                #endif
+            }
+        }
     }
 
     public void PlayAgainButton() {
-        SceneManager.LoadScene("SceneMenu");
+        clickSound.Play();
+        currentTime = waitTime;
+        playAgain = true;
+        exit = false;
     }
 
     public void ExitButton() {
-        #if UNITY_EDITOR
-            UnityEditor.EditorApplication.isPlaying = false;
-        #else
-            Application.Quit();
-        #endif
+        clickSound.Play();
+        currentTime = waitTime;
+        exit = true;
+        playAgain = true;
     }
 }

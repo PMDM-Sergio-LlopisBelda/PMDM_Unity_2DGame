@@ -1,5 +1,5 @@
 using System.Collections;
-using System.Collections.Generic;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -8,51 +8,51 @@ public class PlayerController : MonoBehaviour
     public float Speed = 0.0f;
     public float lateralMovement = 2.0f;
     public float jumpMovement = 400.0f;
+    [SerializeField] bool canHeal = false;
+    public bool isGrounded = true;
+    public bool canMove = true;
+    public bool playingWithButtons = false;
+    public float scale = 0.7f;
+    private bool movesLeft = false;
+    private bool movesRight = false;
+    public bool playWithMobile;
     public Transform groundCheck;
     public Animator animator;
     public Rigidbody2D rigidbody2d;
-    public bool isGrounded = true;
-    public bool canMove = true;
-    public float scale = 0.7f;
     public ShopChestHandler shopChestHandler;
-    private HpManager hpManager;
+    private HpManagerPlayer HpManagerPlayer;
     public Collider2D[] bossDors;
-    public bool playingWithButtons = false;
-
-    private bool canHeal = false;
+    public AudioSource jumpSound;
 
     void Start () 
     {
-        //animator = GetComponent<Animator>();
+        #if UNITY_EDITOR 
+        {
+            playingWithButtons = false;
+        }
+        #else
+        {
+            playingWithButtons = true;
+        }
+        #endif
+
         rigidbody2d = GetComponent<Rigidbody2D> ();
-        hpManager = GetComponent<HpManager>();
+        HpManagerPlayer = GetComponent<HpManagerPlayer>();
     }
+
     void Update () 
     {
-        if (!isGrounded) {
-            isGrounded = Physics2D.Linecast (transform.position,
-            groundCheck.position,
-            LayerMask.GetMask("Ground"));
-        }
-
-        if (!isGrounded) {
-            isGrounded = Physics2D.Linecast (transform.position,
-            groundCheck.position,
-            LayerMask.GetMask("Enemy"));
-        }
-
-        if (isGrounded && Input.GetButtonDown("Jump") && !playingWithButtons) {
-            rigidbody2d.AddForce (Vector2.up * jumpMovement);
-            isGrounded = false;
-        }
-        
-        if (isGrounded) {
-            animator.SetTrigger("Grounded");
-        } else {
-            animator.SetTrigger("Jump");
-        }
+        isGrounded = Physics2D.Linecast (transform.position,
+        groundCheck.position,
+        LayerMask.GetMask("Ground"));
 
         if (!playingWithButtons) {
+            if (isGrounded && Input.GetButtonDown("Jump")) {
+                jumpSound.Play();
+                rigidbody2d.AddForce (Vector2.up * jumpMovement);
+                isGrounded = false;
+            }
+
             if (canMove) {
                 Speed = Input.GetAxis("Horizontal") * lateralMovement;
                 transform.Translate (Vector2.right * Speed * Time.deltaTime);
@@ -60,43 +60,88 @@ public class PlayerController : MonoBehaviour
             }
         }
 
+        if (isGrounded) {
+            animator.SetTrigger("Grounded");
+        } else {
+            animator.SetTrigger("Jump");
+        }
 
         if (Speed < 0) {
             transform.localScale = new Vector3(-scale, scale, scale);
         } else if (Speed > 0){
             transform.localScale = new Vector3(scale, scale, scale);
         }
+
     }
 
-    public void MoveLeft() {
-        if (canMove) {
-            Speed = -lateralMovement;
-            transform.Translate (Vector2.right * Speed * Time.deltaTime);
-            animator.SetFloat("Speed", Mathf.Abs(Speed));
-            playingWithButtons = true;
+    public void MoveLeftButtonDown() {
+        if (playingWithButtons) {
+            movesLeft = true;
+            StartCoroutine(Left());
         }
     }
 
-    public void MoveRight() {
-        if (canMove) {
-            Speed = lateralMovement;
-            transform.Translate (Vector2.right * Speed * Time.deltaTime);
-            animator.SetFloat("Speed", Mathf.Abs(Speed));
-            playingWithButtons = true;
+    public void MoveLeftButtonUp() {
+        if (playingWithButtons) {
+            Speed = 0;
+            animator.SetFloat("Speed", 0);
+            movesLeft = false;
         }
     }
 
-    public void JumpByButton() {
-        if (isGrounded) {
-            isGrounded = false;
-            animator.SetTrigger("Jump");
+    IEnumerator Left() {
+        while (movesLeft) {
+            if (canMove) {
+                Speed = -lateralMovement;
+                transform.Translate (Vector2.right * Speed * Time.deltaTime);
+                animator.SetFloat("Speed", Mathf.Abs(Speed));
+                playingWithButtons = true;
+            }
+            yield return null;
+        }
+    }
+
+    public void MoveRightButtonDown() {
+        if (playingWithButtons) {
+            movesRight = true;
+            StartCoroutine(Right());            
+        }
+    }
+    public void MoveRightButtonUp() {
+        if (playingWithButtons) {
+            Speed = 0;
+            animator.SetFloat("Speed", 0);
+            movesRight = false;            
+        }
+    }
+
+    IEnumerator Right() {
+        while (movesRight) {
+            if (canMove) {
+                Speed = lateralMovement;
+                transform.Translate (Vector2.right * Speed * Time.deltaTime);
+                animator.SetFloat("Speed", Mathf.Abs(Speed));
+                playingWithButtons = true;
+            }
+            yield return null;
+        }
+    }
+
+    public void JumpButton() {
+        if (playingWithButtons && isGrounded) {
+            jumpSound.Play();
             rigidbody2d.AddForce (Vector2.up * jumpMovement);
-            playingWithButtons = true;
+            isGrounded = false;
         }
     }
 
     void OnTriggerEnter2D(Collider2D collider)
     {
+
+        if (collider.CompareTag("Zoom")) {
+            GameObject.Find("MainVirtual").GetComponent<CinemachineVirtualCamera>().enabled = false;
+        }
+            
         if (collider.gameObject.tag == "Gold") {
             GameManager.coindsCollected++;
             GameManager.totalCoins++;
@@ -107,9 +152,11 @@ public class PlayerController : MonoBehaviour
             collider.enabled = false;
             Destroy(collider.gameObject, 2f);
         }
+
         if (collider.gameObject.tag == "ShopChest") {
             StartCoroutine(OpenShopChest());
         }
+
         if (collider.gameObject.tag == "BossArenaDetector") {
             collider.enabled = false;
             
@@ -131,7 +178,7 @@ public class PlayerController : MonoBehaviour
         }
 
         if (collider.gameObject.tag == "KillArea") {
-            hpManager.actualHp = 0;
+            GameManager.currentHP = 0;
         }
 
     }
@@ -141,6 +188,12 @@ public class PlayerController : MonoBehaviour
             canHeal = true;
             StartCoroutine(FountainHealPlayer());
         }
+    }
+
+    void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.CompareTag("Zoom"))
+            GameObject.Find("MainVirtual").GetComponent<CinemachineVirtualCamera>().enabled = true;
     }
 
     IEnumerator OpenShopChest() {
@@ -153,7 +206,7 @@ public class PlayerController : MonoBehaviour
 
     IEnumerator FountainHealPlayer() {
         while(canHeal) {
-            hpManager.Heal();
+            HpManagerPlayer.Heal();
             canHeal = false;
             yield return new WaitForSeconds(1);
         }
@@ -164,13 +217,16 @@ public class PlayerController : MonoBehaviour
         if(collision.gameObject.CompareTag("MovePlatform"))
         {
             transform.parent = collision.transform;
-            
         }
     }
 
     void OnCollisionExit2D(Collision2D collision)
     {
         transform.parent = null;
+    }
+
+    private void EnableButtons(bool enable) {
+        
     }
 
 }

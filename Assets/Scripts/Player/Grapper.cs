@@ -17,18 +17,39 @@ public class Grapper : MonoBehaviour
     public LayerMask grapplableMask;
     private LineRenderer line;
     private Vector2 target;
+    public AudioSource chairSound;
+    private PlayerController playerController;
 
     void Start()
     {
         line = GetComponent<LineRenderer>();
+        playerController = player.GetComponent<PlayerController>();
     }
 
     void Update()
     {
-        if ((Input.GetMouseButtonDown(1) || (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)) && !isGrappling)
-        {
-            StarGrapple();
+        if (!playerController.playingWithButtons) {
+            if (Input.GetMouseButtonDown(1) && !isGrappling)
+            {
+                StarGrapple();
+            }
+        } else {
+            if (Input.touchCount > 0)
+            {
+                for (int i = 0; i < Input.touchCount; i++)
+                {
+                    Touch touch = Input.GetTouch(i);
+                    if (touch.phase == TouchPhase.Began)
+                    {
+                        if (!isGrappling)
+                        {
+                            StarGrapple();
+                        }
+                    }
+                }
+            }
         }
+
 
         if (connectedHook)
         {
@@ -84,7 +105,7 @@ public class Grapper : MonoBehaviour
         line.SetPosition(1, transform.position);
 
         Vector2 newPosition;
-
+        chairSound.Play();
         for (; currentTimeGrappling < maxTimeGrappling; currentTimeGrappling += grappleShootSpeed * Time.deltaTime)
         {
             newPosition = Vector2.Lerp(transform.position, target, currentTimeGrappling / maxTimeGrappling);
